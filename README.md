@@ -13,6 +13,7 @@
 - [Goal](#goal)
 - [Usage](#usage)
 - [Findings](#findings)
+- [Predicting the 2020-21 NBA MVP](#predicting-the-2020-21-NBA-MVP)
 - [Legality](#legality)
 - [Source Files](#source-files)
 
@@ -46,23 +47,21 @@ The training data comes from [Kaggle](https://www.kaggle.com/drgilermo/nba-playe
 
 ## The Methodology:
 This naïve Bayes classifier uses two different approaches. In one, I discretize the statistics, categorizing each statistic into their respective quartiles, and use the data with the traditional Bayes' Theorem:
-$$ P(class | features) = P(features | class) * P(class) / P(features) $$
-In the other approach, I used the statistics as they are (continuous data) and used Gaussian naïve Bayes where 
-$$ p(x=v\mid C_{k})={\frac {1}{\sqrt {2\pi \sigma _{k}^{2}}}}\,e^{-{\frac {(v-\mu _{k})^{2}}{2\sigma _{k}^{2}}}}} $$
 
-[(Back to top)](#table-of-contents)
+P(class | features) = P(features | class) * P(class) / P(features)
 
-Here are some quick definitions of terms used in this project:
-* **[Bar](https://www.lexico.com/en/definition/bar)**: One line of lyrics. Detected by line break characters. Typically takes four beats.
-* **[End rhymes](https://literarydevices.net/end-rhyme/)**: Rhymes that occur with the last word/syllables of a bar. Example: "I like greens / She likes beans" (greens and beans, the last word of each bar/line, rhyme).
-* **[Exact rhyme](https://literarydevices.net/exact-rhyme/)**: When the vowel sound and final consonant of two words are phonetically the same, e.g. greens and beans.
-* **[Vowel rhyme](https://www.thefreedictionary.com/vowel+rhyme)**: When the vowel sound of two words are phonetically the same, e.g. green and seem.
-* **[Stop word](https://www.geeksforgeeks.org/removing-stop-words-nltk-python)**: A word that does not contribute much meaning, e.g. the, a, an. Search engines are programmed to ignore these words, and ignoring these words both save processing time and allow us to analyze lyrics more meaningfully.
+In the other approach, I used the statistics as they are (continuous data) and used [Gaussian naïve Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Gaussian_na%C3%AFve_Bayes) which calculates a probability density for a parameter given a class.
 
+In order to exercise what I have learned in my Data Science courses, I chose to implement these probability functions myself, but there are Python packages out there that do all the work for you!
+
+Using the statistics above, I attempted to classify players': 
+- All Star status: based on a player's season statistics, would we classify them as an All Star or not?
+- Position: based on a player's season statistics, which position would we classify them as (guard, guard-forward, forward, forward-center, or center)?
+- Decade: based on a player's season statistics, which decade would we classify them as (80s, 90s, 2000s, or 2010s)?
 [(Back to top)](#table-of-contents)
 
 ## Goal
-As stated above, this project has some limitations in terms of the consistency of lyric data, the extent to which the packages/tools used can analyze rap lyrics, and the overall subjectivity of this topic. Ultimately, I started this project as a fun way to both explore one of my interests and utilize the skills and technical knowledge I have learned thus far. But, I certainly believe that the results of this project can give insight into how rap music has evolved over the years.
+The goal of this project, along with my others, is to provide a fun and interesting way to practice my growing Data Science skills and to delve deeper into something I'm interested in. Additionally, I have sought out to answer some of the burning questions that are circulated amongst the basketball community!
 
 [(Back to top)](#table-of-contents)
 
@@ -75,34 +74,29 @@ The [source files](#source-files) contain all the functions used to web scrape, 
 [(Back to top)](#table-of-contents)
 
 ## Findings
-While all four metrics seemed to decline over the years, **% Unique Rhymes to All Rhymes** (number of unique rhymes / number of all rhymes) proved to be the metric with:
-- The strongest correlation coefficient (-0.52)
-- Lowest p-value (p = 0.003)
+The classifier for All Star status had relatively high accuracy (determined by number of correct classifications / total number of classifications), but this is likely because only 20-30 players out of over 500 per season are all stars. Instead, I took the players who were most likely to be an All Star, which is defined by players whose probability of being an All Star were highest, and found how many I guessed correctly. For the 2018-19 season, I guessed 6/26 All Stars correctly, namely Kyrie Irving, Bradley Beal, DeMar DeRozan, Jimmy Butler, Klay Thompson, and Kemba Walker. For the 2020-21 season, I guessed 4/22 All Stars correctly, namely Jayson Tatum, Anthony Davis, Donovan Mitchell, and LeBron James.
 
-![scatter](https://github.com/jacquelinekclee/hiphop_nlp_webscrape/blob/master/rhymes_plot.png)
+The classifier for position only guessed correctly around 60-70% of the time. This could be some indication that position either doesn't matter all that much and is more trivial than some may think, or that a player's position goes beyond their statistic performance. I believe the latter is true, but also think that positionless basketball is definitely here to stay. 
 
-Even though what qualifies as "good music" will always be subjective, quantifying the quality of lyrics in these songs proved to be insightful. The generally weak relationships between each metric and year indicate that any "decline" in hip-hop/rap music may not be as strong as some would assume. 
-
-As mentioned above, hip-hop has become the most popular genre of music. With this ever increasing popularity comes more commercial and lucrative opportunities, and such opportunities are not necessarily conducive to lyrically complex and intricately crafted songs. The genre becoming more commerical and marketable does not mean that there are no lyrically interesting songs being made. But, this trend may contribute to an oversaturated market, where mostly catchy, less intricate songs become popular.
-
-Overall, this project gives evidence that hip-hop as a genre has not seen a dramatic decline. Instead, changing trends in the music industry and how the public consumes media may affect what types of songs become most popular, but not necessarily the skills of all rappers.  
+The classifier for decade only guessed correctly around 30% of the time. This indicates that any sort of play style or typical stat line is characteristic of a certain decade. I think positions per game, other metrics that measure pace, the different types of shots attempted, points scored per game, and other statistics that measure how the game as a whole is played (not a player's performance) would be better statistics to try and classify gameplay by decade. 
 
 [(Back to top)](#table-of-contents)
  
+## Predicting the 2020-21 NBA MVP
+The classifier predicts that the 5 players who are most likely to be the 2020-21 MVP are:
+- LeBron James
+- Kawhi Leonard
+- Giannis Antetokounmpo
+- Luka Dončic
+- Jaylen Brown
+
 ## Source Files
-* [web_scrape.py](https://github.com/jacquelinekclee/hiphop_nlp_webscrape/blob/master/web_scrape.py)
-  * Has all the functions used for web scraping and processing the HTML. It also processes the string (lyrics) so it's ready for analyzing the lyrics.
-* [lyrics.py](https://github.com/jacquelinekclee/hiphop_nlp_webscrape/blob/master/lyrics.py)
-  * Used to break down the string of lyrics into bars and words and calculate the word based metrics.
-* [rhyme.py](https://github.com/jacquelinekclee/hiphop_nlp_webscrape/blob/master/rhyme.py)
-  * Provides the functions used to calculate the rhyme-based metrics
-  * The contents of this file are adopted from the dandelion package as laid out [here](https://github.com/DiegoVicen/dandelion). Edits made by me (jacquelinekclee) are denoted in the docstrings.
- 
- ## Legality
- 
- This personal project was made for the sole intent of applying my skills in Python thus far and as a way to learn new ones. It is intended for non-commercial uses only.
- 
- Some issues with webscraping from AZLyrics arose as I was developing this project because the website detected an unusual amount of activity. An alternative to AZLyrics is
- [archive.org](https://archive.org/), a website that regularly stores archives for various webpages. Nonetheless, using the [Jupyter Notebook viewer](https://nbviewer.jupyter.org/github/jacquelinekclee/hiphop_nlp_webscrape/blob/master/Has%20Hip-Hop%20Gotten%20Worse_.ipynb) should not present any issues.
- 
+* [probabilities.py](https://github.com/jacquelinekclee/naivebayes_nba_players/blob/main/probabilities.py)
+  * Has all the functions used for calculate the naïve Bayes probabilities.
+* [naivebayes_nba_players.py](https://github.com/jacquelinekclee/naivebayes_nba_players/blob/main/naivebayes_nba_players.py)
+  * Has all the functions used to manipulate/clean the data/DataFrames so that they're ready for analysis.
+
+## Legality
+This personal project was made for the sole intent of applying my skills in Python thus far and as a way to learn new ones. It is intended for non-commercial uses only.
+
 [(Back to top)](#table-of-contents)
