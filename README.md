@@ -67,9 +67,9 @@ The goal of this project, along with my others, is to provide a fun and interest
 
 ## Usage
 
-Please refer to the [Jupyter Notebook viewer](https://nbviewer.jupyter.org/github/jacquelinekclee/hiphop_nlp_webscrape/blob/master/Has%20Hip-Hop%20Gotten%20Worse_.ipynb) to view all the code and visualizations created during this project.
+Please refer to the [Jupyter Notebook viewer](https://nbviewer.jupyter.org/github/jacquelinekclee/naivebayes_nba_players/blob/main/naive_bayes_nba_players.ipynb) to view all the code used to make this project.
 
-The [source files](#source-files) contain all the functions used to web scrape, process the text, and calcualte the metrics used for the project.
+The [source files](#source-files) contain all the functions used to calculate the probabilities and clean/manipulate the data and DataFrames.
 
 [(Back to top)](#table-of-contents)
 
