@@ -15,7 +15,7 @@
 - [Findings](#findings)
 - [Predicting the 2020-21 NBA MVP](#predicting-the-2020-21-NBA-MVP)
 - [Legality](#legality)
-- [Source Files](#source-files)
+- [Source File](#source-file)
 
 ## Background
 As someone who has been playing basketball since the second grade and has been a Warriors fan since birth, the NBA and basketball in general has always held a special place in my heart. There are several questions in the world of basketball that will forever be debated such as: 
@@ -69,7 +69,7 @@ The goal of this project, along with my others, is to provide a fun and interest
 
 Please refer to the [Jupyter Notebook viewer](https://nbviewer.jupyter.org/github/jacquelinekclee/naivebayes_nba_players/blob/main/naive_bayes_nba_players.ipynb) to view all the code used to make this project.
 
-The [source files](#source-files) contain all the functions used to calculate the probabilities and clean/manipulate the data and DataFrames.
+The [source file](#source-file) contains all the functions used to clean/manipulate the data and DataFrames.
 
 [(Back to top)](#table-of-contents)
 
@@ -90,7 +90,7 @@ The classifier predicts that the 5 players who are most likely to be the 2020-21
 - Luka Dončic
 - Jaylen Brown
 
-## Source Files
+## Source File
 * [probabilities.py](https://github.com/jacquelinekclee/naivebayes_nba_players/blob/main/probabilities.py)
   * Has all the functions used for calculate the naïve Bayes probabilities.
 
