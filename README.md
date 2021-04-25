@@ -93,8 +93,6 @@ The classifier predicts that the 5 players who are most likely to be the 2020-21
 ## Source Files
 * [probabilities.py](https://github.com/jacquelinekclee/naivebayes_nba_players/blob/main/probabilities.py)
   * Has all the functions used for calculate the naïve Bayes probabilities.
-* [naivebayes_nba_players.py](https://github.com/jacquelinekclee/naivebayes_nba_players/blob/main/naivebayes_nba_players.py)
-  * Has all the functions used to manipulate/clean the data/DataFrames so that they're ready for analysis.
 
 ## Legality
 This personal project was made for the sole intent of applying my skills in Python thus far and as a way to learn new ones. It is intended for non-commercial uses only.
